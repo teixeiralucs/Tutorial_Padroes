@@ -1,0 +1,8 @@
+# Compilação Java
+bin/
+*.class
+
+# IDEs e configurações de ambiente
+.vscode/
+.idea/
+*.iml
