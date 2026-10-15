@@ -38,5 +38,33 @@ public class Main {
         }
 
         logger.log("Execução da atividade finalizada.");
+
+        System.out.println("\n==================================================");
+        System.out.println("Aulas Rápidas (menos de 45 min.");
+        System.out.println("==================================================");
+        listarAulasCurtas(cursoEngenharia, 45);
+
     }
+
+    // Percorre a estrutura usando apenas os métodos Composite e Iterator
+    public static void listarAulasCurtas(ComponenteCatalogo componente, int limiteMinutos) {
+        // Se for uma aula:
+        if (componente instanceof Aula) {
+            if (componente.getDuracaoMinutos() <= limiteMinutos) {
+                System.out.println(
+                        " -> [Aula Curta] " + componente.getNome() + " (" + componente.getDuracaoMinutos() + " min)");
+            }
+            return;
+        }
+
+        // Se for um módulo, usa-se o Itaretor para navegar pelos filhos sem expor a
+        // lista interna
+        Iterator<ComponenteCatalogo> it = componente.criarIterator();
+        while (it.hasNext()) {
+            ComponenteCatalogo filho = it.next();
+            listarAulasCurtas(filho, limiteMinutos);
+        }
+
+    }
+
 }
